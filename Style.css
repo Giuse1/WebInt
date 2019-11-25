@@ -4,3 +4,6 @@
 .material-icons{
     margin-top: 5%;
 }
+#rotationButton:active{
+    background-color: red;
+}

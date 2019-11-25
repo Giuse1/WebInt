@@ -10,6 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
     <style>
         .fakeimg {
             height: 200px;
@@ -42,10 +43,10 @@
             <form>
                 <div class="row" id="inputForm">
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="URL">
+                        <input type="text" class="form-control" placeholder="URL" id="urlForm">
                     </div>
                     <div class="col">
-                        <input type="text" class="form-control" placeholder="Offset">
+                        <input type="text" class="form-control" placeholder="Offset" id="Offset">
                     </div>
                 </div>
                 <div class="row" id="buttons">
@@ -53,7 +54,7 @@
                         <button type="button" class="btn btn-outline-dark">Preview<i class="material-icons">movie</i></button>
                     </div>
                     <div class="col">
-                        <button type="button" class="btn btn-outline-dark">Rotate<i class="material-icons">rotate_left</i></button>
+                        <button id="rotationButton" type="button" class="btn btn-outline-dark">Rotate<i class="material-icons">rotate_left</i></button>
                     </div>
                 </div>
             </form>
@@ -70,10 +71,11 @@
             <h5>A short explanation of how the Internet will change because of article 13</h5>
 
             <div class="embed-responsive embed-responsive-16by9">
-                <video controls class ="defaultvideo"  >
+                <video controls class ="defaultvideo"  autoplay id = "myVideo">
                     <source src="https://upload.wikimedia.org/wikipedia/commons/6/6b/-SaveYourInternet_-_-DeleteArt13-_Big_Businesses_Fighting_Each_Other_to_the_Detriment_of_Freedom.webm" type="video/webm">
                 </video>
             </div>
+            Default controls: <input type="checkbox" checked id="myCheck"  onclick="toggleControls()">
 
 
 
@@ -117,4 +119,5 @@
 </div>
 
 </body>
+<script src="javascript.js"></script>
 </html>
