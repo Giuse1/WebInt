@@ -7,3 +7,8 @@
 #rotationButton:active{
     background-color: red;
 }
+.web-cam video {
+    width:320px ;
+    height:320px;
+    border-radius: 80%;
+}
