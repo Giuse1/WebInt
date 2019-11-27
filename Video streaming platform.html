@@ -4,19 +4,20 @@
 
     <title>Bootstrap 4 Website Example</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         .fakeimg {
             height: 200px;
             background: #aaa;
         }
     </style>
+
     <link rel="stylesheet" type="text/css" href="Style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
@@ -27,7 +28,7 @@
     <p>See your video and enjoy!</p>
 </div>
 
-<div class="container" style="margin-top:30px">
+<div class="container" style="margin-top:30px" >
     <div class="row">
         <div class="col-sm-8">
             <form>
@@ -37,7 +38,8 @@
                 </nav>
             </form>
 
-            </div>
+        </div>
+
         <div class="col-sm-4">
             <form>
                 <div class="row" id="inputForm">
@@ -50,7 +52,12 @@
                 </div>
                 <div class="row" id="buttons">
                     <div class="col">
-                        <button id="previewButton" type="button" class="btn btn-outline-dark" data-toggle="popover" title="Popover Header" data-html="true" data-content="<img src='https://codepen.io/Tolchi/pen/bZLMrJ/image/large.png' width='200' />">Preview<i class="material-icons">movie</i></button>
+                        <!--<button id="previewButton" type="button" class="btn btn-outline-dark" data-toggle="popover" title="Popover Header" data-html="true" data-content="<img src='https://codepen.io/Tolchi/pen/bZLMrJ/image/large.png' width='200' />">Preview<i class="material-icons">movie</i></button>-->
+                        <button id="previewButton" type="button" class="btn btn-outline-dark">Preview<i class="material-icons">movie</i></button>
+
+                        <canvas id="previewCanvas">
+
+                        </canvas>
                     </div>
                     <div class="col">
                         <button id="rotationButton" type="button" class="btn btn-outline-dark">Rotate<i class="material-icons">rotate_right</i></button>
@@ -72,15 +79,25 @@
 
             <div class="embed-responsive embed-responsive-16by9">
                 <video controls autoplay class ="defaultvideo" id = "myVideo">
-                    <source src="https://upload.wikimedia.org/wikipedia/commons/6/6b/-SaveYourInternet_-_-DeleteArt13-_Big_Businesses_Fighting_Each_Other_to_the_Detriment_of_Freedom.webm" type="video/webm">
+                    <source src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Japanese_Immigration_to_Philippines_%281930s%29.webm" type="video/webm">
                 </video>
+            </div>
+            <div>
+                <canvas id="mirroredCanvas">
+
+                </canvas>
             </div>
             <div class="web-cam">
                 <video controls>
                     <source src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Solar_Eclipse_2017_%2820170825%29.webm" type="video/webm">
                 </video>
-
             </div>
+            <div id="outer">
+                <video controls id="v">
+                    <source src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Solar_Eclipse_2017_%2820170825%29.webm" type="video/webm">
+                </video>
+            </div>
+
             Default controls: <input type="checkbox" checked id="myCheck"  onclick="toggleControls()">
             <p>Some text..</p>
             <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
@@ -98,9 +115,13 @@
     </div>
 </div>
 
-<div class="jumbotron text-center" style="margin-bottom:0">
+
+
+<footer class="jumbotron text-center" style="margin-bottom:0">
     <p>Footer</p>
-</div>
+</footer>
 </body>
+
 <script src="javascript.js"></script>
+
 </html>
