@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Bootstrap 4 Website Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="Style_Giuse.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>My streaming video page</h1>
+    <p>See your video and enjoy!</p>
+    <div id="outer">
+        <video controls id="v" muted autoplay>
+            <source src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Solar_Eclipse_2017_%2820170825%29.webm" type="video/webm">
+        </video>
+    </div>
+</div>
+
+<div class="container" style="margin-top:30px" >
+    <div class="row">
+        <div class="col-sm-8">
+            <form>
+                <nav id="searchContainer">
+                    <label for="searchInput"></label>
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search..." >
+                </nav>
+            </form>
+
+        </div>
+
+        <div class="col-sm-4">
+            <form>
+                <div class="row" id="inputForm">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="URL" id="urlForm">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Offset" id="Offset">
+                    </div>
+                </div>
+                <div class="row" id="buttons">
+                    <div class="col">
+                        <!--<button id="previewButton" type="button" class="btn btn-outline-dark" data-toggle="popover" title="Popover Header" data-html="true" data-content="<img src='https://codepen.io/Tolchi/pen/bZLMrJ/image/large.png' width='200' />">Preview<i class="material-icons">movie</i></button>-->
+                        <button id="previewButton" type="button" class="btn btn-outline-dark">Preview<i class="material-icons">movie</i></button>
+
+                        <canvas id="previewCanvas">
+
+                        </canvas>
+                    </div>
+                    <div class="col">
+                        <button id="rotationButton" type="button" class="btn btn-outline-dark">Rotate<i class="material-icons">rotate_right</i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-8">
+
+            <h2>SAVE THE INTERNET</h2>
+            <h5>A short explanation of how the Internet will change because of article 13</h5>
+
+            <div class="embed-responsive embed-responsive-16by9">
+                <video controls muted autoplay class ="defaultvideo" id = "myVideo">
+                    <source src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Japanese_Immigration_to_Philippines_%281930s%29.webm" type="video/webm">
+                </video>
+            </div>
+            <div>
+                <canvas id="mirroredCanvas">
+
+                </canvas>
+            </div>
+
+            Default controls: <input type="checkbox" checked id="myCheck"  onclick="toggleControls()">
+
+
+            <div id="myNav" class="overlay">
+                    
+                    <div class="overlay-content">
+                
+                <!-- Section: form dark -->
+                <section class="form-dark mb-5">
+
+                <!--Form without header-->
+                
+                <div class="text-white rgba-stylish-strong">
+            
+                    <!--Header-->
+                    <div class="text-center" id="login">
+                        <p>Before being able to add a comment to the video, it is necessary to be registered. </p>
+                        <p>Please, fill the following form with your information and then push the button at the bottom of the page to be redirected to our streaming website!</p>
+                    <h3>
+                        <strong>LOGIN</strong>
+                    </h3>
+                    </div>
+            
+                    <div class="form">
+                    <input type="text" id="firstName" class="form-control">
+                    <label for="firstName">Your name</label>
+                    </div>
+            
+                    <div class="form">
+                    <input type="text" id="lastName" class="form-control">
+                    <label for="lastName">Your surname</label>
+                    </div>
+            
+                    <div class="form">
+                    <input type="email" id="email" class="form-control">
+                    <label for="email">Your email</label>
+                    </div>
+            
+                    <div class="form">
+                    <input type="tel" id="phone" class="form-control">
+                    <label for="phone">Your phone number</label>
+                    </div>
+
+                    <button id="submitButton" type="button" class="btn btn-success" onclick="saveInformation()">Confirm</button>
+                    <button type="button" class="btn btn-light" onclick="closeNav()">Go back</button>
+                </div>
+            </section>
+
+                            </div>
+                        </div>
+
+                    <div class="form-group" >
+                        <label for="commentInput">Comment:</label>
+                        <textarea class="form-control" rows="5" id="commentInput"></textarea>
+                    </div>
+
+
+
+
+                    <p>Some text..</p>
+                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                    <br>
+                    <h2>TITLE HEADING</h2>
+                    <h5>Title description, Sep 2, 2017</h5>
+                    <div class="fakeimg">Fake Image</div>
+                    <p>Some text..</p>
+                    <p>Sunt in culpa qui officia deserunt mollit anim id est laborum consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                </div>
+                <div class="col-sm-4">
+
+
+        </div>
+    </div>
+</div>
+
+
+
+<footer class="jumbotron text-center" style="margin-bottom:0">
+    <p>Footer</p>
+</footer>
+</body>
+
+<script src="javascript_Giuse.js"></script>
+
+</html>
