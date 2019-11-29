@@ -59,12 +59,16 @@ function validNumber(n){
     }
 }
 
+// check if email address is valid
 function validMail(email) {
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         console.log(re.test(String(email).toLowerCase()));
         return re.test(String(email).toLowerCase());
+}
 
-
+// return the city and the country of the user
+function getCityCountry() {
+    return "City, Country"
 }
 
 // check if all form inputs are filled
@@ -103,6 +107,10 @@ function presentInformation() {
     let lastName = window.sessionStorage.getItem("lastName");
     let email = window.sessionStorage.getItem("email");
     let phone = window.sessionStorage.getItem("phone");
+    console.log(name);
+    console.log(lastName);
+    console.log(email);
+    console.log(phone);
 
     if (name && lastName && email && phone)
         return true;
@@ -110,9 +118,9 @@ function presentInformation() {
         return false;
 }
 
-
+// saves the user information
 function saveInformation() {
-    console.log("clcked");
+    console.log("saving info");
     if (filledForm())
         if (validName(firstName) && validName(lastName) && validNumber(phone) && validMail(email)){
             console.log("check ok");
@@ -121,10 +129,45 @@ function saveInformation() {
             window.sessionStorage.setItem("email", email);
             window.sessionStorage.setItem("phone", phone);
             closeNav()
+            commentButton.style.display = "none";
+            labelComment.style.display = "block";
+            commentInput.style.display = "block";
+            addCommentButton.style.display = "block";
         }
         else
             console.log("not ok")
 
+}
+
+// save comment in local storage
+function saveComment(s) {
+
+    let commentStr = s;
+    let name = myStorage.getItem("firstName");
+    let lastName = myStorage.getItem("lastName");
+    commentStr += " " + name + " " + lastName + getDate() + " " + getCityCountry();
+    // saving the comment
+    myStorage.setItem(commentKey.toString(), commentStr);
+    commentKey += 1;
+
+    myStorage.setItem("numberComments", commentKey.toString());
+}
+
+// create an area to show the comment just posted when newComment is true; when it is false, it is used to show comments
+// in the local storage
+function showComment(s, newComment) {
+
+    // Adds an element to the document
+    var p = document.getElementById("commentArea");
+    var newElement = document.createElement("textarea");
+    newElement.disabled = true;
+    newElement.style.class = "form-control";
+    newElement.style.rows= "5";
+    if (newComment)
+        newElement.value = s + " " + name + " " + lastName + getDate() + " " + getCityCountry();
+    else
+        newElement.value = s;
+    p.appendChild(newElement);
 }
 
 myStorage = window.localStorage;
@@ -136,16 +179,17 @@ var video = document.getElementById("myVideo");
 var source = video.getElementsByTagName("source")[0];
 var numberClicks = 0;
 var canvas = document.getElementById("previewCanvas");
+var addCommentButton =  document.getElementById("addComment");
 canvas.width = 150;
 canvas.height = 150;
 
+// listener to get the first frame of the video and put in the preview canvas
 video.addEventListener('loadeddata', function() {
     var $this = this;
-    console.log("loadeddata");
-    console.log(video.readyState);
     canvas.getContext('2d').drawImage($this, 0, 0, canvas.width, canvas.height);
 });
 
+// listener to count the number of clicks on preview button, in order to show or hide the video preview
 var previewButton = document.getElementById("previewButton");
 previewButton.addEventListener("click",function (e) {
     numberClicks += 1;
@@ -195,6 +239,7 @@ video.addEventListener('loadedmetadata', function() {
     mCanvas.height = 100
 });
 
+// listener to put in the proper canvas the mirrored frames of video when it is played
 video.addEventListener('play', function() {
     var $this = this;
     (function loop() {
@@ -208,58 +253,50 @@ video.addEventListener('play', function() {
     })();
 }, 0);
 
+// open the form
 function openNav() {
     document.getElementById("myNav").style.width = "100%";
-  }
+}
 
+// close the form
 function closeNav() {
     document.getElementById("myNav").style.width = "0%";
 }
 
-var commentKey = 0;
-// retrieve number of comments if any
-if (myStorage.getItem("numberComments"))
-    commentKey = myStorage.getItem("numberComments");
-
-
-// save the comment and update the number of comments
-var comment = document.getElementById("commentInput");
-comment.addEventListener("keydown", function (e){
-    if (e.keyCode === 13)
-        saveComment()
-});
-function saveComment() {
-
-    let commentStr = comment.value;
-    let name = myStorage.getItem("firstName");
-    let lastName = myStorage.getItem("lastName");
-    commentStr += " " + name + " " + lastName + getCityCountry();
-    // saving the comment
-    myStorage.setItem(commentKey.toString(), commentStr);
-    commentKey += 1;
-
-    myStorage.setItem("numberComments", commentKey.toString());
-    window.alert(myStorage.getItem("numberComments"));
-
-}
-
-// load comments if user is authenticated
-presentInformation();
-if (presentInformation()){
+var labelComment =   document.getElementById("labelComment");
+var commentInput = document.getElementById("commentInput");
+var commentButton = document.getElementById("commentButton");
+// if user is authenticated show comment and hide button to login
+if (presentInformation()) {
+    console.log("present")
+    commentButton.style.display = "none";
+    labelComment.style.display = "block";
+    commentInput.style.display = "block";
+    addCommentButton.style.display = "block";
     let numberComments = myStorage.getItem("numberComments");
+    console.log(numberComments);
 
     for (let i = 0; i < numberComments; i++) {
         let commentToLoad = myStorage.getItem(i.toString());
-        loadComment(commentToLoad);
+        showComment(commentToLoad,newComment=false);
     }
 }
 
-function getCityCountry() {
-    return "City, Country"
-}
-// load comments when page is loaded
-function loadComment(i) {
+var commentKey = 0;
 
-    var strComment = myStorage.getItem(i.toString());
-    // caricare elemento in cui va il commento e inserirlo
-}
+// retrieve number of comments if any
+if (myStorage.getItem("numberComments"))
+    commentKey = Number(myStorage.getItem("numberComments"));
+
+
+// save the comment and update the number of comments
+commentInput.addEventListener("keydown", function (e){
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        saveComment(commentInput.value);
+        showComment(commentInput.value, newComment = true);
+        commentInput.value = "";}
+});
+
+
+
