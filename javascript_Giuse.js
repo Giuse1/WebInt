@@ -71,24 +71,27 @@ function getCityCountry() {
     return "City, Country"
 }
 
-// check if all form inputs are filled
+// check if all form inputs are filled and correct
 function filledForm() {
 
-    firstName = document.getElementById("firstName").value;
-    lastName = document.getElementById("lastName").value;
-    email = document.getElementById("email").value;
-    phone = document.getElementById("phone").value;
-    if (firstName && lastName && email && phone)
-        return true
+    let name = document.getElementById("firstName").value;
+    let surname = document.getElementById("lastName").value;
+    let mail = document.getElementById("email").value;
+    let tel = document.getElementById("phone").value;
+    if (name && surname && mail && tel && validName(name) && validName(surname) && validNumber(mail) && validMail(tel)){
+            firstName = name;
+            lastName = surname;
+            email = mail;
+            phone = tel;
+            return true}
     else{
         window.alert("Missing information")
         return false
     }
-
 }
 
 // return current date-time string
-function getDate() {
+function dateStr() {
     let d = new Date();
     let day = d.getDate();
     let month = d.getMonth();
@@ -100,35 +103,39 @@ function getDate() {
     return strDate
 }
 
-// check if the user information are already present in the session storage
+// check if the user information are already present in the session storage and save them if present
 function presentInformation() {
 
     let name = window.sessionStorage.getItem("firstName");
-    let lastName = window.sessionStorage.getItem("lastName");
-    let email = window.sessionStorage.getItem("email");
-    let phone = window.sessionStorage.getItem("phone");
+    let surname = window.sessionStorage.getItem("lastName");
+    let mail = window.sessionStorage.getItem("email");
+    let tel = window.sessionStorage.getItem("phone");
     console.log(name);
-    console.log(lastName);
-    console.log(email);
-    console.log(phone);
+    console.log(surname);
+    console.log(mail);
+    console.log(tel);
 
-    if (name && lastName && email && phone)
+    if (name && surname && mail && tel) {
+        firstName = name;
+        lastName = surname;
+        email = mail;
+        phone = tel;
         return true;
+    }
     else
         return false;
 }
 
-// saves the user information
+// saves the user information in session storage
 function saveInformation() {
     console.log("saving info");
-    if (filledForm())
-        if (validName(firstName) && validName(lastName) && validNumber(phone) && validMail(email)){
+    if (filledForm()) {
             console.log("check ok");
             window.sessionStorage.setItem("firstName", firstName);
             window.sessionStorage.setItem("lastName", lastName);
             window.sessionStorage.setItem("email", email);
             window.sessionStorage.setItem("phone", phone);
-            closeNav()
+            closeNav();
             commentButton.style.display = "none";
             labelComment.style.display = "block";
             commentInput.style.display = "block";
@@ -143,9 +150,6 @@ function saveInformation() {
 function saveComment(s) {
 
     let commentStr = s;
-    let name = myStorage.getItem("firstName");
-    let lastName = myStorage.getItem("lastName");
-    commentStr += " " + name + " " + lastName + getDate() + " " + getCityCountry();
     // saving the comment
     myStorage.setItem(commentKey.toString(), commentStr);
     commentKey += 1;
@@ -155,7 +159,7 @@ function saveComment(s) {
 
 // create an area to show the comment just posted when newComment is true; when it is false, it is used to show comments
 // in the local storage
-function showComment(s, newComment) {
+function showComment(s ) {
 
     // Adds an element to the document
     var p = document.getElementById("commentArea");
@@ -163,11 +167,37 @@ function showComment(s, newComment) {
     newElement.disabled = true;
     newElement.style.class = "form-control";
     newElement.style.rows= "5";
-    if (newComment)
-        newElement.value = s + " " + name + " " + lastName + getDate() + " " + getCityCountry();
-    else
-        newElement.value = s;
+    newElement.value = s;
     p.appendChild(newElement);
+}
+
+// open the form
+function openNav() {
+    document.getElementById("myNav").style.width = "100%";
+}
+
+// close the form
+function closeNav() {
+    document.getElementById("myNav").style.width = "0%";
+}
+
+// inserts the video in the jukebox player
+function insertVideoJukebox(v) {
+
+    let url = v.getElementsByTagName("source")[0].src;
+    let type = 'video/webm';
+    let source = videoJukebox.getElementsByTagName("source")[0];
+
+    if (!source) {
+        source = document.createElement('source');
+        videoJukebox.appendChild(source);
+    }
+    source.src = url;
+    source.type = type;
+    console.log(v.currentTime);
+    videoJukebox.load();
+    videoJukebox.currentTime = 0;
+    videoJukebox.play();
 }
 
 myStorage = window.localStorage;
@@ -180,6 +210,7 @@ var source = video.getElementsByTagName("source")[0];
 var numberClicks = 0;
 var canvas = document.getElementById("previewCanvas");
 var addCommentButton =  document.getElementById("addComment");
+var n = 0; // counter for jukebox
 canvas.width = 150;
 canvas.height = 150;
 
@@ -253,16 +284,6 @@ video.addEventListener('play', function() {
     })();
 }, 0);
 
-// open the form
-function openNav() {
-    document.getElementById("myNav").style.width = "100%";
-}
-
-// close the form
-function closeNav() {
-    document.getElementById("myNav").style.width = "0%";
-}
-
 var labelComment =   document.getElementById("labelComment");
 var commentInput = document.getElementById("commentInput");
 var commentButton = document.getElementById("commentButton");
@@ -288,17 +309,19 @@ var commentKey = 0;
 if (myStorage.getItem("numberComments"))
     commentKey = Number(myStorage.getItem("numberComments"));
 
-
 // save the comment and update the number of comments
-commentInput.addEventListener("keydown", function (e){
-    if (e.keyCode === 13) {
-        e.preventDefault();
-        saveComment(commentInput.value);
-        showComment(commentInput.value, newComment = true);
-        commentInput.value = "";}
+var addCommentButton = document.getElementById("addComment");
+addCommentButton.addEventListener("click", function (e){
+        if (!commentInput.value)
+         window.alert("Insert comment please");
+        else{
+            let commentStr = commentInput.value + "\n" + firstName + " " + lastName + "\n" +dateStr() + ", " + getCityCountry();
+            saveComment(commentStr);
+            showComment(commentStr);
+            commentInput.value = "";}
 });
 
-
+// loop to attach the listeners to the videos of the jukebox
 for (let i = 1; i<=3; i++ ) {
     let id = "video"+i.toString();
     let video1 = document.getElementById(id);
@@ -319,40 +342,24 @@ for (let i = 1; i<=3; i++ ) {
     });
 
     video1.addEventListener("click",function () {
+        n = i-1;
+        console.log(n)
         insertVideoJukebox(video1);
         video1.pause();
     });
 }
 
 var videoJukebox = document.getElementById("mainVideoJukebox")
-function insertVideoJukebox(v) {
+var firstVideo = document.getElementById("video1");
+// insert the first video in the jukebox
+insertVideoJukebox(firstVideo);
 
-    let url = v.getElementsByTagName("source")[0].src;
+// listener to play the next video when one ends
+videoJukebox.addEventListener("ended",function () {
+    n += 1;
+    let x = n%3 +1;
+    console.log(x)
+    let v = document.getElementById("video"+x.toString());
+    insertVideoJukebox(v);
+});
 
-    addSourceToVideo(videoJukebox, url, 'video/webm');
-
-}
-
-function addSourceToVideo(v, src, type) {
-    let source = v.getElementsByTagName("source")[0];
-
-    if (!source) {
-        source = document.createElement('source');
-        v.appendChild(source);
-    }
-    source.src = src;
-    source.type = type;
-    console.log(v.currentTime);
-    v.load();
-    v.currentTime = 0;
-    console.log(v.currentTime);
-    v.play();
-}
-
-
-
-
-var video3 = document.getElementById("video3");
-video3.currentTime = 5;
-video3.play();
-video3.pause();
