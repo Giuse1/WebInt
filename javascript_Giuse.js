@@ -299,4 +299,60 @@ commentInput.addEventListener("keydown", function (e){
 });
 
 
+for (let i = 1; i<=3; i++ ) {
+    let id = "video"+i.toString();
+    let video1 = document.getElementById(id);
+    video1.addEventListener("mouseover", function () {
+        video1.play();
+    });
 
+    var startTime = video1.currentTime;
+    video1.addEventListener('timeupdate', (event) => {
+        let sec = Math.floor(video1.currentTime);
+
+        if ((sec - startTime) === 5)
+            video1.currentTime = 0;
+    });
+
+    video1.addEventListener("mouseout", function () {
+        video1.pause();
+    });
+
+    video1.addEventListener("click",function () {
+        insertVideoJukebox(video1);
+        video1.pause();
+    });
+}
+
+var videoJukebox = document.getElementById("mainVideoJukebox")
+function insertVideoJukebox(v) {
+
+    let url = v.getElementsByTagName("source")[0].src;
+
+    addSourceToVideo(videoJukebox, url, 'video/webm');
+
+}
+
+function addSourceToVideo(v, src, type) {
+    let source = v.getElementsByTagName("source")[0];
+
+    if (!source) {
+        source = document.createElement('source');
+        v.appendChild(source);
+    }
+    source.src = src;
+    source.type = type;
+    console.log(v.currentTime);
+    v.load();
+    v.currentTime = 0;
+    console.log(v.currentTime);
+    v.play();
+}
+
+
+
+
+var video3 = document.getElementById("video3");
+video3.currentTime = 5;
+video3.play();
+video3.pause();
