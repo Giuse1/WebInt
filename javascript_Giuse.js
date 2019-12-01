@@ -11,8 +11,8 @@ function takeOffset() {
     let new_offset = offset.value;
     console.log(typeof new_offset);
     let number_offset = Number(new_offset);
-    if (typeof number_offset === 'number' && Number.isInteger(number_offset)){
-        if(number_offset < 0)
+    if (typeof number_offset === 'number' && Number.isInteger(number_offset)) {
+        if (number_offset < 0)
             window.alert("Error: the number is negative");
         else if (number_offset > video.duration)
             window.alert("Error: the number exceeds the length of the video");
@@ -20,7 +20,7 @@ function takeOffset() {
             video.currentTime = new_offset;
             video.play();
         }
-    }    else
+    } else
         window.alert("Error: the input is not an integer number");
 }
 
@@ -30,17 +30,17 @@ function toggleControls() {
     if (checkBox.checked === true)
         video.controls = true;
     else
-        video.controls =  false;
+        video.controls = false;
 }
 
 // check if name and last name contains only letters and spaces
-function validName(s){
+function validName(s) {
 
     s = s.replace(/\s/g, '');
     var letters = /([A-Z]|[a-z]|\s)/;
-    if(s.match(letters))
+    if (s.match(letters))
         return true;
-    else{
+    else {
         console.log("name")
         return false;
     }
@@ -48,12 +48,12 @@ function validName(s){
 }
 
 // check if telephone number contains only digits
-function validNumber(n){
+function validNumber(n) {
 
     console.log(n)
     if (/^\d+$/.test(n))
         return true
-    else{
+    else {
         window.alert("Not valid phone number")
         return false
     }
@@ -61,14 +61,15 @@ function validNumber(n){
 
 // check if email address is valid
 function validMail(email) {
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        console.log(re.test(String(email).toLowerCase()));
-        return re.test(String(email).toLowerCase());
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    console.log(re.test(String(email).toLowerCase()));
+    return re.test(String(email).toLowerCase());
 }
 
-// return the city and the country of the user
+
+
 function getCityCountry() {
-    return "City, Country"
+    return  sessionStorage.getItem("city") + ", " + sessionStorage.getItem("country");
 }
 
 // check if all form inputs are filled and correct
@@ -78,16 +79,18 @@ function filledForm() {
     let surname = document.getElementById("lastName").value;
     let mail = document.getElementById("email").value;
     let tel = document.getElementById("phone").value;
-    if (name && surname && mail && tel && validName(name) && validName(surname) && validNumber(mail) && validMail(tel)){
+
+    if (name && surname && mail && tel)
+        if (validName(name) && validName(surname) && validNumber(tel) && validMail(mail)) {
             firstName = name;
             lastName = surname;
             email = mail;
             phone = tel;
-            return true}
-    else{
-        window.alert("Missing information")
-        return false
-    }
+            return true
+        } else {
+            window.alert("Missing information ");
+            return false
+        }
 }
 
 // return current date-time string
@@ -98,7 +101,7 @@ function dateStr() {
     let year = d.getFullYear();
     let hour = d.getHours();
     let minute = d.getMinutes();
-    let strDate = hour + ":" +minute+ " "+ day + "/" + month + "/" + year;
+    let strDate = hour + ":" + minute + " " + day + "/" + month + "/" + year;
     console.log(strDate)
     return strDate
 }
@@ -121,8 +124,7 @@ function presentInformation() {
         email = mail;
         phone = tel;
         return true;
-    }
-    else
+    } else
         return false;
 }
 
@@ -130,19 +132,19 @@ function presentInformation() {
 function saveInformation() {
     console.log("saving info");
     if (filledForm()) {
-            console.log("check ok");
-            window.sessionStorage.setItem("firstName", firstName);
-            window.sessionStorage.setItem("lastName", lastName);
-            window.sessionStorage.setItem("email", email);
-            window.sessionStorage.setItem("phone", phone);
-            closeNav();
-            commentButton.style.display = "none";
-            labelComment.style.display = "block";
-            commentInput.style.display = "block";
-            addCommentButton.style.display = "block";
-        }
-        else
-            console.log("not ok")
+        console.log("check ok");
+        window.sessionStorage.setItem("firstName", firstName);
+        window.sessionStorage.setItem("lastName", lastName);
+        window.sessionStorage.setItem("email", email);
+        window.sessionStorage.setItem("phone", phone);
+        closeNav();
+        commentButton.style.display = "none";
+        labelComment.style.display = "block";
+        commentInput.style.display = "block";
+        addCommentButton.style.display = "block";
+        loadComments();
+    } else
+        console.log("not ok")
 
 }
 
@@ -157,18 +159,29 @@ function saveComment(s) {
     myStorage.setItem("numberComments", commentKey.toString());
 }
 
-// create an area to show the comment just posted when newComment is true; when it is false, it is used to show comments
-// in the local storage
-function showComment(s ) {
+// create an area to show the comments
+function showComment(comment, user, location) {
+    let element = document.getElementById("commentArea");
+    let p = document.createElement("p");
+    p.style.border = "thick solid #0000FF";
 
+    p.style.wordBreak = "break-word"
+    p.style.width = "500px";
+
+
+    var node = document.createTextNode(comment);
+    var node2 = document.createTextNode(user);
+    var node3 = document.createTextNode(location);
+
+    p.appendChild(node);
+    p.appendChild(document.createElement("BR"));
+    p.appendChild(node2);
+    p.appendChild(document.createElement("BR"));
+    p.appendChild(node3);
+
+    element.appendChild(p);
     // Adds an element to the document
-    var p = document.getElementById("commentArea");
-    var newElement = document.createElement("textarea");
-    newElement.disabled = true;
-    newElement.style.class = "form-control";
-    newElement.style.rows= "5";
-    newElement.value = s;
-    p.appendChild(newElement);
+
 }
 
 // open the form
@@ -209,40 +222,40 @@ var video = document.getElementById("myVideo");
 var source = video.getElementsByTagName("source")[0];
 var numberClicks = 0;
 var canvas = document.getElementById("previewCanvas");
-var addCommentButton =  document.getElementById("addComment");
+var addCommentButton = document.getElementById("addComment");
 var n = 0; // counter for jukebox
 canvas.width = 150;
 canvas.height = 150;
 
 // listener to get the first frame of the video and put in the preview canvas
-video.addEventListener('loadeddata', function() {
+video.addEventListener('loadeddata', function () {
     var $this = this;
     canvas.getContext('2d').drawImage($this, 0, 0, canvas.width, canvas.height);
 });
 
 // listener to count the number of clicks on preview button, in order to show or hide the video preview
 var previewButton = document.getElementById("previewButton");
-previewButton.addEventListener("click",function (e) {
+previewButton.addEventListener("click", function (e) {
     numberClicks += 1;
 
-    if (numberClicks%2 == 1){
+    if (numberClicks % 2 == 1) {
         canvas.style.display = "block";
-    }else
+    } else
         canvas.style.display = "none";
 });
 
 // change video URL when a new one is inserted
-var urlForm  = document.getElementById("urlForm");
-urlForm.addEventListener("keydown", function (e){
-    if (e.keyCode === 13){
+var urlForm = document.getElementById("urlForm");
+urlForm.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
         takeUrl();
     }
 });
 
 // offeset video
 var offset = document.getElementById("Offset");
-offset.addEventListener("keydown", function (e){
-    if (e.keyCode === 13){
+offset.addEventListener("keydown", function (e) {
+    if (e.keyCode === 13) {
         takeOffset();
     }
 });
@@ -252,12 +265,12 @@ var angle = 0;
 var rotationButton = document.getElementById("rotationButton");
 rotationButton.addEventListener("click", function () {
     angle += 90;
-    angle = angle%360;
-    video.style.transform = "rotate("+angle+"deg)";
+    angle = angle % 360;
+    video.style.transform = "rotate(" + angle + "deg)";
 })
 
 // listener to check if the inserted URL is correct
-source.addEventListener("error", function() {
+source.addEventListener("error", function () {
     window.alert("Error: the video link is wrong!")
 });
 
@@ -265,30 +278,34 @@ source.addEventListener("error", function() {
 var mCanvas = document.getElementById('mirroredCanvas');
 var context = mCanvas.getContext('2d');
 
-video.addEventListener('loadedmetadata', function() {
+video.addEventListener('loadedmetadata', function () {
     mCanvas.width = 150;
     mCanvas.height = 100
 });
 
 // listener to put in the proper canvas the mirrored frames of video when it is played
-video.addEventListener('play', function() {
+video.addEventListener('play', function () {
     var $this = this;
     (function loop() {
         if (!$this.paused && !$this.ended) {
             context.save();
             context.scale(-1, 1);
-            context.drawImage($this, 0, 0, mCanvas.width*-1, mCanvas.height);
+            context.drawImage($this, 0, 0, mCanvas.width * -1, mCanvas.height);
             context.restore();
             setTimeout(loop, 1000 / 30); // drawing at 30fps
         }
     })();
 }, 0);
 
-var labelComment =   document.getElementById("labelComment");
+var labelComment = document.getElementById("labelComment");
 var commentInput = document.getElementById("commentInput");
 var commentButton = document.getElementById("commentButton");
 // if user is authenticated show comment and hide button to login
-if (presentInformation()) {
+if (presentInformation())
+    loadComments();
+
+// loads already presents comments
+function loadComments() {
     console.log("present")
     commentButton.style.display = "none";
     labelComment.style.display = "block";
@@ -299,7 +316,15 @@ if (presentInformation()) {
 
     for (let i = 0; i < numberComments; i++) {
         let commentToLoad = myStorage.getItem(i.toString());
-        showComment(commentToLoad,newComment=false);
+
+        let splitted = commentToLoad.split(',');
+        let c = splitted[0];
+        let u = splitted[1];
+        let d = splitted[2];
+        let city = splitted[3];
+        let country = splitted[4];
+        let userAndDate = u + ", " + d;
+        showComment(c, userAndDate, city + ", " + country);
     }
 }
 
@@ -311,19 +336,21 @@ if (myStorage.getItem("numberComments"))
 
 // save the comment and update the number of comments
 var addCommentButton = document.getElementById("addComment");
-addCommentButton.addEventListener("click", function (e){
-        if (!commentInput.value)
-         window.alert("Insert comment please");
-        else{
-            let commentStr = commentInput.value + "\n" + firstName + " " + lastName + "\n" +dateStr() + ", " + getCityCountry();
-            saveComment(commentStr);
-            showComment(commentStr);
-            commentInput.value = "";}
+addCommentButton.addEventListener("click", function (e) {
+    if (!commentInput.value)
+        window.alert("Insert comment please");
+    else {
+        let commentStr = commentInput.value + "," + firstName + " " + lastName + "," + dateStr() + "," + getCityCountry();
+        let userAndDate = firstName + " " + lastName + ", " + dateStr();
+        saveComment(commentStr);
+        showComment(commentInput.value, userAndDate, getCityCountry());
+        commentInput.value = "";
+    }
 });
 
 // loop to attach the listeners to the videos of the jukebox
-for (let i = 1; i<=3; i++ ) {
-    let id = "video"+i.toString();
+for (let i = 1; i <= 3; i++) {
+    let id = "video" + i.toString();
     let video1 = document.getElementById(id);
     video1.addEventListener("mouseover", function () {
         video1.play();
@@ -341,8 +368,8 @@ for (let i = 1; i<=3; i++ ) {
         video1.pause();
     });
 
-    video1.addEventListener("click",function () {
-        n = i-1;
+    video1.addEventListener("click", function () {
+        n = i - 1;
         console.log(n)
         insertVideoJukebox(video1);
         video1.pause();
@@ -355,11 +382,11 @@ var firstVideo = document.getElementById("video1");
 insertVideoJukebox(firstVideo);
 
 // listener to play the next video when one ends
-videoJukebox.addEventListener("ended",function () {
+videoJukebox.addEventListener("ended", function () {
     n += 1;
-    let x = n%3 +1;
+    let x = n % 3 + 1;
     console.log(x)
-    let v = document.getElementById("video"+x.toString());
+    let v = document.getElementById("video" + x.toString());
     insertVideoJukebox(v);
 });
 
