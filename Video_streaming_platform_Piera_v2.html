@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Bootstrap 4 Website Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale =1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="initial-scale=1.0,
+    width=device-width" />
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-core.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://js.api.here.com/v3/3.1/mapsjs-service.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .fakeimg {
+            height: 200px;
+            background: #aaa;
+        }
+    </style>
+
+    <link rel="stylesheet" type="text/css" href="Style_Piera_v2.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+<body>
+
+<header class="jumbotron text-center" style="margin-bottom:0">
+    <h1>My streaming video page</h1>
+    <p>See your video and enjoy!</p>
+    <div id="outer">
+        <video controls id="v" muted autoplay>
+            <source src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Solar_Eclipse_2017_%2820170825%29.webm"
+                    type="video/webm">
+        </video>
+    </div>
+</header>
+
+<div class="container" style="margin-top:30px">
+    <div class="row">
+        <div class="col-sm-8">
+            <div id="personalInfo" class="col">
+            </div>
+            <form>
+                <nav id="searchContainer">
+                    <label for="searchInput"></label>
+                    <input type="text" class="form-control" id="searchInput" placeholder="Search...">
+                </nav>
+            </form>
+            <div class="embed-responsive embed-responsive-16by9">
+                    <video controls muted autoplay class="defaultvideo" id="myVideo">
+                        <source src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Japanese_Immigration_to_Philippines_%281930s%29.webm"
+                                type="video/webm">
+                    </video>
+            </div>
+            Default controls: <input type="checkbox" checked id="myCheck" onclick="toggleControls()">
+
+
+            <div id="myNav" class="overlay">
+
+                <div class="overlay-content">
+
+                    <!-- Section: form dark -->
+                    <section class="form-dark mb-5">
+
+                        <!--Form without header-->
+
+                        <div class="text-white rgba-stylish-strong">
+
+                            <!--Header-->
+                            <div class="text-center" id="login">
+                                <p>Before being able to add a comment to the video, it is necessary to be
+                                    registered. </p>
+                                <p>Please, fill the following form with your information and then push the button at the
+                                    bottom of the page to be redirected to our streaming website!</p>
+                                <h3>
+                                    <strong>LOGIN</strong>
+                                </h3>
+                            </div>
+
+                            <div class="form">
+                                <input type="text" id="firstName" class="form-control">
+                                <label for="firstName">Your name</label>
+                            </div>
+
+                            <div class="form">
+                                <input type="text" id="lastName" class="form-control">
+                                <label for="lastName">Your surname</label>
+                            </div>
+
+                            <div class="form">
+                                <input type="email" id="email" class="form-control">
+                                <label for="email">Your email</label>
+                            </div>
+
+                            <div class="form">
+                                <input type="tel" id="phone" class="form-control">
+                                <label for="phone">Your phone number</label>
+                            </div>
+
+                            <button id="submitButton" type="button" class="btn btn-success" onclick="saveInformation()">
+                                Confirm
+                            </button>
+                            <button type="button" class="btn btn-light" onclick="closeNav()">Go back</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <div>
+                <button id="commentButton" type="button" class="btn btn-outline-dark" onclick="openNav()">Login to
+                    comment
+                </button>
+            </div>
+
+            <div class="form-group">
+                <label id="labelComment" style="display: none" for="commentInput">Add Comment here</label>
+                <textarea id="commentInput" style="display: none" class="form-control" rows="5"></textarea>
+                <button style="display: none" id="addComment" type="button" class="btn btn-outline-dark">Submit
+                    comment
+                </button>
+            </div>
+
+
+            <div id="commentArea" class="col-sm-4">
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <form>
+                <div class="row" id="inputForm">
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="URL" id="urlForm">
+                    </div>
+                    <div class="col">
+                        <input type="text" class="form-control" placeholder="Offset" id="Offset">
+                    </div>
+                </div>
+                <div class="row" id="buttons">
+                    <div class="col">
+                        <!--<button id="previewButton" type="button" class="btn btn-outline-dark" data-toggle="popover" title="Popover Header" data-html="true" data-content="<img src='https://codepen.io/Tolchi/pen/bZLMrJ/image/large.png' width='200' />">Preview<i class="material-icons">movie</i></button>-->
+                        <button id="previewButton" type="button" class="btn btn-outline-dark">Preview<i
+                                class="material-icons">movie</i></button>
+
+                        <canvas id="previewCanvas">
+
+                        </canvas>
+                    </div>
+                    <div class="col">
+                        <button id="rotationButton" type="button" class="btn btn-outline-dark">Rotate<i
+                                class="material-icons">rotate_right</i></button>
+                    </div>
+
+                    <div class="col-sm-12" id="commercials">
+                            <img src="https://farm2.static.flickr.com/1220/952588075_1d6356ae27_o.jpg" id="adv1">
+                            <img src="http://1.bp.blogspot.com/-R55OsymgLa4/Ug15Vi_4WbI/AAAAAAAAE5Q/6OFiGVt3egk/s1600/3.jpg" id="adv2">
+                            <img src="https://i.pinimg.com/originals/a2/37/c3/a237c3e7fe3e9e20d721a73c321f6e5d.png" id="adv3">
+                            <img src="https://imgix.ranker.com/user_node_img/50061/1001210025/original/1-photo-u1?w=650&q=50&fm=pjpg&fit=crop&crop=faces" id="adv4">
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-sm-8">
+            
+
+            <div>
+                <canvas id="mirroredCanvas">
+
+                </canvas>
+            </div>
+
+
+
+
+            <h2>Jukebox video player</h2>
+            <h5 id="videoTitle">title</h5>
+            <div class="embed-responsive embed-responsive-16by9">
+                <video controls muted autoplay class="defaultvideo" id="mainVideoJukebox">
+                </video>
+            </div>
+            <div class="col-sm-12">
+                <div class="row">
+                    <div class="col">
+                        <video id="video1" muted width="200" height="200">
+                            <source src="https://upload.wikimedia.org/wikipedia/commons/c/cb/What_is_PeerTube_%3F_%28sous-titres_Fran%C3%A7ais%29_1080p.webm"
+                                    type="video/webm">
+                        </video>
+                    </div>
+                    <div class="col">
+                        <video id="video2" muted width="200" height="200" >
+                            <source src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Brexit_Protests.webm"
+                                    type="video/webm">
+                        </video>
+                    </div>
+                    <div class="col">
+                        <video id="video3" muted width="200" height="200">
+                            <source src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Solar_Eclipse_2017_%2820170825%29.webm"
+                                    type="video/webm">
+                        </video>
+                    </div>
+                </div>
+
+                <details id="details">
+                    <summary>Show your position</summary>
+                    <div id="mapContainer" style="width: 640px; height: 350px;"></div>
+                </details>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <footer class="jumbotron text-center" style="margin-bottom:0">
+        <p>Footer</p>
+    </footer>
+</div>
+
+<script src="javascript_Piera_v2.js"></script>
+<script src="reverseHere.js"></script>
+</body>
+
+
+
+</html>
