@@ -1,0 +1,316 @@
+.jumbotron{
+    background-color: #D2FFCE !important;
+    font-family: 'Sacramento', cursive;
+}
+#personalInfo {
+    font-family: 'Sacramento', cursive;
+    font-size: 250%;
+    padding: 2%;
+    border-radius: 15%;
+
+}
+
+#searchInput{
+    border: #D2FFCE;
+    font-family: 'Sacramento', cursive;
+    font-size: 200%;
+}
+
+#urlForm{
+    
+    font-family: 'Sacramento', cursive;
+    font-size: 150%;
+}
+
+#Offset{
+    
+    font-family: 'Sacramento', cursive;
+    font-size: 150%;
+}
+
+#mirrored{
+    margin-top: 15px;
+    
+}
+
+#buttons{
+    margin-top: 2%;
+    font-family: 'Sacramento', cursive;
+    font-size: 150%;
+}
+.material-icons{
+    margin-top: 5%;
+}
+
+#prewText{
+    font-size: 200%;
+}
+#rotaText{
+    font-size: 200%;
+}
+#rotationButton{
+    padding-top: 20%;
+    margin-top: 10px;
+    border: none;
+}
+#previewButton{
+    padding-top: 20%;
+    margin-top: 10px;
+    border: none;
+}
+
+#submitButton{
+    border: none;
+    font-size: 100%;
+    background-color: #AFEBAB;
+    color: black;
+}
+
+#backButton{
+    border: none;
+    font-size: 100%;
+    background-color: #AFEBAB;
+    color: black;
+}
+
+#commentButton{
+    background-color: #AFEBAB;
+    font-family: 'Sacramento', cursive;
+    font-size: 200%;
+    margin-top: 5%;
+    border: none;
+}
+
+
+#previewCanvas{
+    position: absolute;
+    border: dashed #AFEBAB;
+    border-radius: 5%;
+    display: none;
+    opacity: 0.9;
+}
+
+
+@media only screen and (max-width: 800px) {
+    #previewCanvas {
+        position: unset;
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 550px) {
+    #previewCanvas {
+        position: unset;
+        width: 100%;
+        height: 90%;
+        display: none;
+    }
+}
+
+#outer {
+    width: 100px;
+    height: 100px;
+    border-radius: 500px;
+    overflow: hidden;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.overlay {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0, 0.9);
+    overflow-x: hidden;
+    transition: 0.7s;
+  }
+  
+  .overlay-content {
+    position: relative;
+    margin-top: 2%;
+    width: 100%;
+    text-align: center;
+
+  }
+  
+  .overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+  }
+  
+  .overlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 45px;
+    font-size: 60px;
+  }
+  
+  @media screen and (max-height: 450px) {
+    .overlay a {font-size: 20px}
+    .overlay .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+    }
+  }
+
+#myNav {
+    font-family: 'Sacramento', cursive;
+    font-size: 200%;
+}
+
+#login {
+    color: #AFEBAB;
+    margin-bottom: 2%;
+}
+  .form-dark .md-form label {
+    color: #AFEBAB;
+  }
+  .form-dark input[type=text]:focus:not([readonly]) {
+    border-bottom: 1px solid #AFEBAB;
+    -webkit-box-shadow: 0 1px 0 0 #AFEBAB;
+    box-shadow: 0 1px 0 0 #AFEBAB;
+  }
+  .form-dark input[type=text]:focus:not([readonly]) + label {
+    color: #AFEBAB;
+  }
+  .form-dark textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #AFEBAB;
+    box-shadow: 0 1px 0 0 #AFEBAB;
+    color: #AFEBAB;
+  }
+
+#videos {
+    background-color: #D2FFCE;
+    border-radius: 5%;
+    padding: 5%;
+    margin-top: 5%;
+    border-style: dashed;
+    border-color: #AFEBAB;
+}
+
+
+#jukebox {
+    font-size: 300%;
+    text-align: center;
+    font-family: 'Sacramento', cursive;
+    background-color: #D2FFCE;
+    border-radius: 5%;
+    padding: 5%;
+    margin-top: 5%;
+    border-style: dashed;
+    border-color: #AFEBAB;
+    margin-bottom: 5%;
+}
+
+.form input{
+    font-size: 100%;
+}
+
+.form{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+  #commercials{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+    z-index: -1;
+  }
+
+  #adv1 {
+      max-width: 100%;
+      height: auto;
+  }
+
+  #adv2 {
+    max-width: 100%;
+    height: auto;
+}
+
+#adv3 {
+    max-width: 100%;
+    height: auto;
+}
+
+#adv4 {
+    max-width: 100%;
+    height: auto;
+}
+
+#checkControls {
+    font-family: 'Sacramento', cursive;
+    font-size: 150%;
+
+}
+
+#mirrored {
+    font-family: 'Sacramento', cursive;
+    font-size: 150%;
+    margin-top: 5%;
+    margin-right: 30%
+}
+
+#commentss {
+    margin-top: 5%;
+    font-family: 'Sacramento', cursive;
+    font-size: 170%;
+}
+
+#commentInput{
+    font-size: 100%;
+    border-color: #AFEBAB;
+}
+
+#addComment {
+    margin-top: 2%;
+    font-size: 100%;
+    background-color: #AFEBAB;
+    border: none;
+}
+
+#commentArea {
+    border-color: red;
+}
+
+#video2 {
+    max-width: 100%;
+}
+#video1 {
+    max-width: 100%;
+}
+#video3 {
+    max-width: 100%;
+}
+
+footer{
+    margin-top: 5%;
+    font-size: 130%;
+}
+
+#videoTitle {
+    text-align: left;
+    font-size: 80%;
+}
+
+#number {
+    text-align: left;
+    font-size: 80%;
+}
