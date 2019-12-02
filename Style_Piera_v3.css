@@ -1,5 +1,5 @@
 .jumbotron{
-    background-color: #AFEBAB !important;
+    background-color: #D2FFCE !important;
     font-family: 'Sacramento', cursive;
 }
 #personalInfo {
@@ -51,12 +51,34 @@
 #rotationButton{
     padding-top: 20%;
     margin-top: 10px;
-    border-color: white;
+    border: none;
 }
 #previewButton{
     padding-top: 20%;
     margin-top: 10px;
-    border-color: white;
+    border: none;
+}
+
+#submitButton{
+    border: none;
+    font-size: 100%;
+    background-color: #AFEBAB;
+    color: black;
+}
+
+#backButton{
+    border: none;
+    font-size: 100%;
+    background-color: #AFEBAB;
+    color: black;
+}
+
+#commentButton{
+    background-color: #AFEBAB;
+    font-family: 'Sacramento', cursive;
+    font-size: 200%;
+    margin-top: 5%;
+    border: none;
 }
 
 
@@ -107,15 +129,15 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0, 0.9);
     overflow-x: hidden;
-    transition: 0.5s;
+    transition: 0.7s;
   }
   
   .overlay-content {
     position: relative;
-    top: 25%;
+    margin-top: 2%;
     width: 100%;
     text-align: center;
-    margin-top: 30px;
+
   }
   
   .overlay a {
@@ -147,34 +169,65 @@
     }
   }
 
+#myNav {
+    font-family: 'Sacramento', cursive;
+    font-size: 200%;
+}
+
+#login {
+    color: #AFEBAB;
+    margin-bottom: 2%;
+}
   .form-dark .md-form label {
-    color: #fff;
+    color: #AFEBAB;
   }
   .form-dark input[type=text]:focus:not([readonly]) {
-    border-bottom: 1px solid #00C851;
-    -webkit-box-shadow: 0 1px 0 0 #00C851;
-    box-shadow: 0 1px 0 0 #00C851;
+    border-bottom: 1px solid #AFEBAB;
+    -webkit-box-shadow: 0 1px 0 0 #AFEBAB;
+    box-shadow: 0 1px 0 0 #AFEBAB;
   }
   .form-dark input[type=text]:focus:not([readonly]) + label {
-    color: #fff;
+    color: #AFEBAB;
   }
   .form-dark textarea.md-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid #00C851;
-    box-shadow: 0 1px 0 0 #00C851;
-    color: #fff;
+    border-bottom: 1px solid #AFEBAB;
+    box-shadow: 0 1px 0 0 #AFEBAB;
+    color: #AFEBAB;
   }
 
+#videos {
+    background-color: #D2FFCE;
+    border-radius: 5%;
+    padding: 5%;
+    margin-top: 5%;
+    border-style: dashed;
+    border-color: #AFEBAB;
+}
 
-  .form{
-      width: 50%;
-      margin-left: auto;
-      margin-right: auto;
-  }
-  
-  #login{
-      color: #00C851;
-      font-weight: bold;
-  }
+
+#jukebox {
+    font-size: 300%;
+    text-align: center;
+    font-family: 'Sacramento', cursive;
+    background-color: #D2FFCE;
+    border-radius: 5%;
+    padding: 5%;
+    margin-top: 5%;
+    border-style: dashed;
+    border-color: #AFEBAB;
+    margin-bottom: 5%;
+}
+
+.form input{
+    font-size: 100%;
+}
+
+.form{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 
   #commercials{
     margin-left: auto;
@@ -201,4 +254,49 @@
 #adv4 {
     max-width: 100%;
     height: auto;
+}
+
+#checkControls {
+    font-family: 'Sacramento', cursive;
+    font-size: 150%;
+
+}
+
+#mirrored {
+    font-family: 'Sacramento', cursive;
+    font-size: 150%;
+    margin-top: 5%;
+    margin-right: 30%
+}
+
+#commentss {
+    margin-top: 5%;
+    font-family: 'Sacramento', cursive;
+    font-size: 170%;
+}
+
+#commentInput{
+    font-size: 100%;
+    border-color: #AFEBAB;
+}
+
+#addComment {
+    margin-top: 2%;
+    font-size: 100%;
+    background-color: #AFEBAB;
+    border: none;
+}
+
+#commentArea {
+    border-color: red;
+}
+
+#video2 {
+    max-width: 100%;
+}
+#video1 {
+    max-width: 100%;
+}
+#video3 {
+    max-width: 100%;
 }

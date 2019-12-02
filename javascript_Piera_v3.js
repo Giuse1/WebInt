@@ -165,7 +165,7 @@ function showComment(comment, user, location) {
     let element = document.getElementById("commentArea");
     let p = document.createElement("p");
     p.style.padding = "10px";
-    p.style.border = "solid 1px grey";
+    p.style.border = "dashed #AFEBAB";
 
     p.style.wordBreak = "break-word"
     p.style.width = "500px";

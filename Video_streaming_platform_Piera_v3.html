@@ -53,23 +53,28 @@
             </form>
                 
             
+            
+            <div id="videos">
+            <p id="checkControls">video default controls <input type="checkbox" checked id="myCheck" onclick="toggleControls()"></p>
             <div class="embed-responsive embed-responsive-16by9">
                     <video controls muted autoplay class="defaultvideo" id="myVideo">
                         <source src="https://upload.wikimedia.org/wikipedia/commons/0/0e/Japanese_Immigration_to_Philippines_%281930s%29.webm"
                                 type="video/webm">
                     </video>
-                    Default controls: <input type="checkbox" checked id="myCheck" onclick="toggleControls()">
+                    
             </div>
             
-            <div id="mirrored">
-                
+            
+            <div id="mirrored">    
                 <canvas id="mirroredCanvas">
-        
                 </canvas>
             </div>
+            </div>
 
-
-
+            <div id="loginTo">
+                    <button id="commentButton" type="button" class="btn btn-outline-dark" onclick="openNav()">login to comment
+                    </button>
+                </div>
 
             <div id="myNav" class="overlay">
 
@@ -84,100 +89,97 @@
 
                             <!--Header-->
                             <div class="text-center" id="login">
-                                <p>Before being able to add a comment to the video, it is necessary to be
-                                    registered. </p>
-                                <p>Please, fill the following form with your information and then push the button at the
-                                    bottom of the page to be redirected to our streaming website!</p>
-                                <h3>
-                                    <strong>LOGIN</strong>
-                                </h3>
+                                login 
                             </div>
 
                             <div class="form">
-                                <input type="text" id="firstName" class="form-control">
-                                <label for="firstName">Your name</label>
+                                <input type="text" id="firstName" class="form-control" size="200%">
+                                <label for="firstName">name</label>
                             </div>
 
                             <div class="form">
                                 <input type="text" id="lastName" class="form-control">
-                                <label for="lastName">Your surname</label>
+                                <label for="lastName">surname</label>
                             </div>
 
                             <div class="form">
-                                <input type="email" id="email" class="form-control">
-                                <label for="email">Your email</label>
+                                <input type="text" id="email" class="form-control">
+                                <label for="email">email</label>
                             </div>
 
                             <div class="form">
-                                <input type="tel" id="phone" class="form-control">
-                                <label for="phone">Your phone number</label>
+                                <input type="text" id="phone" class="form-control" >
+                                <label for="phone">phone number</label>
                             </div>
 
                             <button id="submitButton" type="button" class="btn btn-success" onclick="saveInformation()">
-                                Confirm
+                                confirm
                             </button>
-                            <button type="button" class="btn btn-light" onclick="closeNav()">Go back</button>
+                            <button type="button" id="backButton" class="btn btn-light" onclick="closeNav()">go back</button>
                         </div>
                     </section>
                 </div>
             </div>
 
-            <div>
-                <button id="commentButton" type="button" class="btn btn-outline-dark" onclick="openNav()">Login to
+
+
+            <div class="form-group" id="commentss">
+                <label id="labelComment" style="display: none" for="commentInput"></label>
+                <textarea id="commentInput" style="display: none" class="form-control" rows="5" placeholder="add your comment here..."></textarea>
+                <button style="display: none" id="addComment" type="button" class="btn btn-outline-dark">submit
                     comment
                 </button>
             </div>
 
-            <div class="form-group">
-                <label id="labelComment" style="display: none" for="commentInput">Add Comment here</label>
-                <textarea id="commentInput" style="display: none" class="form-control" rows="5"></textarea>
-                <button style="display: none" id="addComment" type="button" class="btn btn-outline-dark">Submit
-                    comment
-                </button>
+
+            <div id="commentArea" class="col-sm-2">
             </div>
 
 
-            <div id="commentArea" class="col-sm-4">
-            </div>
-            <div class="row">
-                    <div class="col-sm-8">
             
-                        <h2>Jukebox video player</h2>
-                        <h5 id="videoTitle">title</h5>
-                        <div class="embed-responsive embed-responsive-16by9">
-                            <video controls muted autoplay class="defaultvideo" id="mainVideoJukebox">
+
+            
+            <div id="jukebox">
+    
+                Jukebox video player
+                
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls muted autoplay class="defaultvideo" id="mainVideoJukebox">
+                    </video>
+                </div>
+
+
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <video id="video1" muted width="200" height="200">
+                                <source src="https://upload.wikimedia.org/wikipedia/commons/c/cb/What_is_PeerTube_%3F_%28sous-titres_Fran%C3%A7ais%29_1080p.webm"
+                                        type="video/webm">
                             </video>
                         </div>
-                        <div class="col-sm-12">
-                            <div class="row">
-                                <div class="col">
-                                    <video id="video1" muted width="200" height="200">
-                                        <source src="https://upload.wikimedia.org/wikipedia/commons/c/cb/What_is_PeerTube_%3F_%28sous-titres_Fran%C3%A7ais%29_1080p.webm"
-                                                type="video/webm">
-                                    </video>
-                                </div>
-                                <div class="col">
-                                    <video id="video2" muted width="200" height="200" >
-                                        <source src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Brexit_Protests.webm"
-                                                type="video/webm">
-                                    </video>
-                                </div>
-                                <div class="col">
-                                    <video id="video3" muted width="200" height="200">
-                                        <source src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Solar_Eclipse_2017_%2820170825%29.webm"
-                                                type="video/webm">
-                                    </video>
-                                </div>
-                            </div>
-            
-                            <details id="details">
-                                <summary>Show your position</summary>
-                                <div id="mapContainer" style="width: 640px; height: 350px;"></div>
-                            </details>
+                        <div class="col-sm-4">
+                            <video id="video2" muted width="200" height="200" >
+                                <source src="https://upload.wikimedia.org/wikipedia/commons/c/cd/Brexit_Protests.webm"
+                                        type="video/webm">
+                            </video>
                         </div>
-            
+                        <div class="col-sm-4">
+                            <video id="video3" muted width="200" height="200">
+                                <source src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Solar_Eclipse_2017_%2820170825%29.webm"
+                                        type="video/webm">
+                            </video>
+                        </div>
                     </div>
-                </div>
+    
+
+
+    
+            </div>
+            <details id="details">
+                    <summary>Show your position</summary>
+                    <div id="mapContainer" style="width: 640px; height: 350px;"></div>
+                </details>
+
+
         </div>
 
         <div class="col-sm-4">
@@ -192,7 +194,7 @@
                 </div>
                 <div class="row" id="buttons">
                     <div class="col">
-                        <!--<button id="previewButton" type="button" class="btn btn-outline-dark" data-toggle="popover" title="Popover Header" data-html="true" data-content="<img src='https://codepen.io/Tolchi/pen/bZLMrJ/image/large.png' width='200' />">Preview<i class="material-icons">movie</i></button>-->
+
                         <button id="previewButton" type="button" class="btn btn-outline-dark"><p id="prewText">Preview <i
                             class="material-icons">movie</i></button></p>
 
@@ -219,7 +221,6 @@
     </div>
 
     <footer class="jumbotron text-center" style="margin-bottom:0">
-        <p>Footer</p>
     </footer>
 </div>
 
